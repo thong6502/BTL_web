@@ -1,20 +1,35 @@
 <?php
   include("../../config/dbconnect.php");
-  class gio_hang{
+  include("../global.php");
+  global $id_hd;
+  global $id_kh;
+  class data_gio_hang{
+    public function them_mot_sp_gio_hang($id_sp){
+      global $conn;
+      if($id_hd){
+        // Nếu id hóa đơn tồn tại thì thêm vào "chi tiết hóa đơn"
+        $sql_tbl_chitiethoadon = "INSERT INTO tbl_chitiethoadon(id_hd, id_sp, soluong) VALUES($id_hd, $id_sp, 1)";
+        mysqli_query($conn, $sql_tbl_chitiethoadon);
+      }else{
+        // Nếu chưa có id hóa đơn thì thêm vào "hóa đơn" và "chi tiết hóa đơn"
+        $sql_tbl_hoadon = "INSERT INTO  tbl_hoadon(tongtien) values (0)";
+        mysqli_query($conn, $sql_tbl_hoadon);
 
-  // themSanPham(): Thêm sản phẩm vào giỏ hàng hoặc cập nhật số lượng nếu sản phẩm đã tồn tại.
+        // Lấy id_hd vừa thêm
+        $sql_select_id = "SELECT id_hd FROM tbl_hoadon where id_kh = $id_kh ORDER BY id_hd DESC LIMIT 1";
+        $result = mysqli_query($conn, $sql_select_id);
+        $id_hd = mysqli_fetch_array($result, 0)['id_hd'];
 
-  // capNhatSoLuong(): Cập nhật số lượng sản phẩm trong giỏ hàng.
-
-  // xoaSanPham(): Xóa sản phẩm khỏi giỏ hàng.
-
-  // xoaGioHang(): Xóa toàn bộ giỏ hàng.
-
-  // getGioHang(): Lấy thông tin giỏ hàng.
-
-  // getTongSoLuong(): Lấy tổng số sản phẩm trong giỏ hàng.
-
-  // getTongGia(): Lấy tổng giá trị giỏ hàng (yêu cầu truy vấn cơ sở dữ liệu để lấy giá sản phẩm).
-
+        // Thêm vào chi tiết hóa đơn
+        $sql_tbl_chitiethoadon = "INSERT INTO tbl_chitiethoadon(id_hd, id_sp, soluong) VALUES($id_hd, $id_sp, 1)";
+        mysqli_query($conn, $sql_tbl_chitiethoadon);
+      }
+    }
+    public function xoa_mot_sp_gio_hang($id_sp){
+      global $conn;
+      $sql = "DELETE FROM tbl_chitiethoadon WHERE id_hd = $id_hd AND id_sp = $id_sp";
+      mysqli_query($conn, $sql);
+    }
+    
   }
 ?>

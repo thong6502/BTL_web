@@ -1,0 +1,1 @@
+mysqli_result object  là một đối tượng chứa kết quả của truy vấn. Đối tượng này chưa phải là dữ liệu trực tiếp, mà là một "con trỏ" trỏ đến dữ liệu. Bạn cần sử dụng các hàm khác như mysqli_fetch_assoc(), mysqli_fetch_array(), hoặc mysqli_fetch_row() để lấy dữ liệu từ đối tượng này.
