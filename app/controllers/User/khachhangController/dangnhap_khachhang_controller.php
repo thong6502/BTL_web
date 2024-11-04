@@ -5,6 +5,6 @@
   if($result){
     echo "Đăng nhập thành công";
   }else{
-    echo '<script>alert("Đăng nhập thất bại")</script>'
+    echo '<script>alert("Đăng nhập thất bại")</script>';
   }
 ?>
