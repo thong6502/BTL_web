@@ -1,0 +1,41 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.header{
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #fff;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.header .logo {
+    display: flex;
+    font-size: 16px;
+}
+
+.inner-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.inner-menu li {
+    margin: 0 20px;
+    padding: 0;
+}
+
+.inner-menu li a {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.inner-menu li a:hover {
+    color: #cce5ff; 
+}
+.header-icon i{
+    font-size: 20px;
+}
