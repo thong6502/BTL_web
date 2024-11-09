@@ -1,5 +1,7 @@
 <?php
-include("../../../config/dbconnect.php");
+// include("../../../config/dbconnect.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");//dẫn tuyệt đối
+  // include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/app/global.php"); 
 class data_admin
 {
   function admin_login($user, $pass)
@@ -20,5 +22,4 @@ class data_admin
     $result = mysqli_query($conn, $sql);
     return $result;
 }
-
 }

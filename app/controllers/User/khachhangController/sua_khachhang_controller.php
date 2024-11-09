@@ -6,6 +6,6 @@
   if($result){
     echo "Sửa thành công";
   }else{
-    echo '<script>alert("Sửa thất bại")</script>'
+    echo '<script>alert("Sửa thất bại")</script>';
   }
 ?>

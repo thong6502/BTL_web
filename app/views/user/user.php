@@ -10,17 +10,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="./Footer/Footer.css">
     <link rel="stylesheet" href="./Header/Header.css">
+    <link rel="stylesheet" href="./ListProduct/Listproduct.css">
 </head>
 
 <body>
     <?php
     include("./Header/Header.php")
     ?>
-    
-    <div class="content" style="height: 600px;">
+    <marquee style="font-size: 20px;font-weight: bold;color: orange;" class="slogan">Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng</marquee>
+    <div class="content" style="height: fit-content">
         <div class="container">
             <?php
             include("./Slider/Slider.php")
+            ?>
+            <?php
+            include("./Listproduct/Listproduct.php")
             ?>
         </div>
     </div>
