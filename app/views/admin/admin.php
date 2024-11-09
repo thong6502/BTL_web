@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quản lý Admin</title>
     <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="./Header/Header.css">
-    <link rel="stylesheet" href="./Sidebar/Sidebar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
 <body>
-    <?php
-    include("./Header/Header.php")
-    ?>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="loadContent('tbl_khachhang.php')">Danh sách khách hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="loadContent('tbl_admin.php')">Danh sách admin</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
     <div class="container-fluid">
         <div class="row">
-            <?php
-                include("./Sidebar/Sidebar.php");
-            ?>
             <div class="table__data">
-                <button onclick="display_khachhang()" class="btn">Hiển thị khách hàng</button>
-                <button onclick="display_admin()" class="btn">Hiển thị admin</button>
                 <div id="table-container"></div>
             </div>
         </div>
     </div>
 
     <script>
-        function display_khachhang() {
-            document.getElementById('table-container').innerHTML = `
-                <?php include("./Main/tbl_khachhang.php"); ?>
-            `;
-        }
-        function display_admin() {
-            document.getElementById('table-container').innerHTML = `
-                <?php include("./Main/tbl_admin.php"); ?>
-            `;
+        function loadContent(page) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `./Main/${page}`, true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById("table-container").innerHTML = xhr.responseText;
+                } else {
+                    document.getElementById("table-container").innerHTML = "Không thể tải nội dung.";
+                }
+            };
+            xhr.send();
         }
     </script>
 
