@@ -1,0 +1,140 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+img,
+picture,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+input,
+select,
+textarea {
+    background-color: transparent;
+    outline: none;
+}
+button {
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+}
+body {
+    min-height: 100vh;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ------------------------ */
+
+body{
+    display: grid;
+    grid:
+        "sidebar body" 1fr
+        / 270px 1fr;
+}
+.sidebar{
+    background-color: #fff;
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ccc;
+}
+.div_logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 25px;
+    margin-top: 12px;
+}
+.div_logo a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo{
+    width: 30%;
+    height: 30%;
+    display: block;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.sidebar li {
+    padding: 18px 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: #3c3b3b;
+}
+
+
+.sidebar li a{
+    display:flex;
+    align-items:center;
+    justify-content:start;
+    gap:18px;
+}
+
+.sidebar li:hover {
+    background-color: #f2f6ff;
+}
+
+.sidebar li.menu {
+    position: relative;
+}
+
+.sub-menu {
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
+    width: 200px;
+    position: absolute;
+    z-index: 1000;
+    right: 0;
+    top: 0;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.sidebar li:hover .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    right: -200px;
+}
+
+.div_img{
+    margin-top: auto;
+    margin-bottom: 20px;
+    border-top: 1px solid #ccc;
+}
+.main{
+    background-color: #efefef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

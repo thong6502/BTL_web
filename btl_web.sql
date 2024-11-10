@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 09, 2024 at 10:34 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 10, 2024 lúc 06:23 AM
+-- Phiên bản máy phục vụ: 10.4.27-MariaDB
+-- Phiên bản PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `btl_web`
+-- Cơ sở dữ liệu: `btl_web`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Cấu trúc bảng cho bảng `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `admin`
+-- Đang đổ dữ liệu cho bảng `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `user`, `password`) VALUES
@@ -44,10 +44,10 @@ INSERT INTO `admin` (`id_admin`, `user`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banner`
+-- Cấu trúc bảng cho bảng `tbl_banner`
 --
 
-CREATE TABLE `banner` (
+CREATE TABLE `tbl_banner` (
   `id_banner` int(11) NOT NULL,
   `img_path` varchar(250) NOT NULL,
   `title` varchar(250) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `banner` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_chitiethoadon`
+-- Cấu trúc bảng cho bảng `tbl_chitiethoadon`
 --
 
 CREATE TABLE `tbl_chitiethoadon` (
@@ -70,7 +70,25 @@ CREATE TABLE `tbl_chitiethoadon` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_hangsanxuat`
+-- Cấu trúc bảng cho bảng `tbl_chuchay`
+--
+
+CREATE TABLE `tbl_chuchay` (
+  `id_textchay` int(11) NOT NULL,
+  `text` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_chuchay`
+--
+
+INSERT INTO `tbl_chuchay` (`id_textchay`, `text`) VALUES
+(0, 'Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbl_hangsanxuat`
 --
 
 CREATE TABLE `tbl_hangsanxuat` (
@@ -79,7 +97,7 @@ CREATE TABLE `tbl_hangsanxuat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_hangsanxuat`
+-- Đang đổ dữ liệu cho bảng `tbl_hangsanxuat`
 --
 
 INSERT INTO `tbl_hangsanxuat` (`id_hsx`, `tenhsx`) VALUES
@@ -92,7 +110,7 @@ INSERT INTO `tbl_hangsanxuat` (`id_hsx`, `tenhsx`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_hoadon`
+-- Cấu trúc bảng cho bảng `tbl_hoadon`
 --
 
 CREATE TABLE `tbl_hoadon` (
@@ -103,7 +121,7 @@ CREATE TABLE `tbl_hoadon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_hoadon`
+-- Đang đổ dữ liệu cho bảng `tbl_hoadon`
 --
 
 INSERT INTO `tbl_hoadon` (`id_hd`, `id_kh`, `ngay_ban`, `tongtien`) VALUES
@@ -121,7 +139,7 @@ INSERT INTO `tbl_hoadon` (`id_hd`, `id_kh`, `ngay_ban`, `tongtien`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_khachhang`
+-- Cấu trúc bảng cho bảng `tbl_khachhang`
 --
 
 CREATE TABLE `tbl_khachhang` (
@@ -134,7 +152,7 @@ CREATE TABLE `tbl_khachhang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_khachhang`
+-- Đang đổ dữ liệu cho bảng `tbl_khachhang`
 --
 
 INSERT INTO `tbl_khachhang` (`id_kh`, `user`, `password`, `hoten`, `diachi`, `sdt`) VALUES
@@ -152,7 +170,7 @@ INSERT INTO `tbl_khachhang` (`id_kh`, `user`, `password`, `hoten`, `diachi`, `sd
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_sanpham`
+-- Cấu trúc bảng cho bảng `tbl_sanpham`
 --
 
 CREATE TABLE `tbl_sanpham` (
@@ -165,7 +183,7 @@ CREATE TABLE `tbl_sanpham` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tbl_sanpham`
+-- Đang đổ dữ liệu cho bảng `tbl_sanpham`
 --
 
 INSERT INTO `tbl_sanpham` (`id_sp`, `id_hsx`, `tensp`, `giaban`, `img_path`, `chitiet`) VALUES
@@ -196,42 +214,24 @@ INSERT INTO `tbl_sanpham` (`id_sp`, `id_hsx`, `tensp`, `giaban`, `img_path`, `ch
 (33, 5, 'Điện thoại IP WiFi Fanvil W611W', 5000000, '/BTL_web/public/imgs/dk6.jpg', '- Màn hình màu 2,4\" 240 x 320 với giao diện người dùng trực quan\r\n\r\n- Mức độ bảo vệ cao IP67\r\n\r\n- Wi-Fi băng tần kép 802.11 a/b/g/n/ac/ax Wi-Fi (Wi-Fi 6, 2.4GHz & 5GHz)\r\n\r\n- Chuyển vùng IEEE802.11k/v/r\r\n\r\n- Mã hóa WPA/WPA2-PSK và 802.1X EAP để đảm bảo an ninh truyền thông\r\n\r\n- Nút bấm để nói (PTT) để quay số nhanh\r\n\r\n- Thời gian đàm thoại lên tới 9 giờ và thời gian chờ lên tới 200 giờ\r\n\r\n \r\n\r\nĐược trang bị pin sạc 1900mAh, W611W sẵn sàng cho thời gian đàm thoại 9 giờ hoặc thời gian chờ 200 giờ. W611W được sử dụng rộng rãi trong nhiều trường hợp khác nhau như doanh nghiệp, trung tâm mua sắm, khu dân cư, khách sạn và nhà kho, mang đến cho người dùng trải nghiệm liên lạc di động chất lượng cao'),
 (34, 5, '', 6000000, '/BTL_web/public/imgs/dk6.jpg', '');
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `txt_chay`
---
-
-CREATE TABLE `txt_chay` (
-  `id_textchay` int(11) NOT NULL,
-  `text` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `txt_chay`
---
-
-INSERT INTO `txt_chay` (`id_textchay`, `text`) VALUES
-(0, 'Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng');
-
---
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `admin`
+-- Chỉ mục cho bảng `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indexes for table `banner`
+-- Chỉ mục cho bảng `tbl_banner`
 --
-ALTER TABLE `banner`
+ALTER TABLE `tbl_banner`
   ADD PRIMARY KEY (`id_banner`);
 
 --
--- Indexes for table `tbl_chitiethoadon`
+-- Chỉ mục cho bảng `tbl_chitiethoadon`
 --
 ALTER TABLE `tbl_chitiethoadon`
   ADD PRIMARY KEY (`id_chitiethoadon`),
@@ -239,96 +239,96 @@ ALTER TABLE `tbl_chitiethoadon`
   ADD KEY `id_hd` (`id_hd`);
 
 --
--- Indexes for table `tbl_hangsanxuat`
+-- Chỉ mục cho bảng `tbl_hangsanxuat`
 --
 ALTER TABLE `tbl_hangsanxuat`
   ADD PRIMARY KEY (`id_hsx`);
 
 --
--- Indexes for table `tbl_hoadon`
+-- Chỉ mục cho bảng `tbl_hoadon`
 --
 ALTER TABLE `tbl_hoadon`
   ADD PRIMARY KEY (`id_hd`),
   ADD KEY `id_kh` (`id_kh`);
 
 --
--- Indexes for table `tbl_khachhang`
+-- Chỉ mục cho bảng `tbl_khachhang`
 --
 ALTER TABLE `tbl_khachhang`
   ADD PRIMARY KEY (`id_kh`);
 
 --
--- Indexes for table `tbl_sanpham`
+-- Chỉ mục cho bảng `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
   ADD PRIMARY KEY (`id_sp`),
   ADD KEY `id_hsx` (`id_hsx`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT cho bảng `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `banner`
+-- AUTO_INCREMENT cho bảng `tbl_banner`
 --
-ALTER TABLE `banner`
+ALTER TABLE `tbl_banner`
   MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_chitiethoadon`
+-- AUTO_INCREMENT cho bảng `tbl_chitiethoadon`
 --
 ALTER TABLE `tbl_chitiethoadon`
   MODIFY `id_chitiethoadon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tbl_hangsanxuat`
+-- AUTO_INCREMENT cho bảng `tbl_hangsanxuat`
 --
 ALTER TABLE `tbl_hangsanxuat`
   MODIFY `id_hsx` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tbl_hoadon`
+-- AUTO_INCREMENT cho bảng `tbl_hoadon`
 --
 ALTER TABLE `tbl_hoadon`
   MODIFY `id_hd` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tbl_khachhang`
+-- AUTO_INCREMENT cho bảng `tbl_khachhang`
 --
 ALTER TABLE `tbl_khachhang`
   MODIFY `id_kh` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tbl_sanpham`
+-- AUTO_INCREMENT cho bảng `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
   MODIFY `id_sp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `tbl_chitiethoadon`
+-- Các ràng buộc cho bảng `tbl_chitiethoadon`
 --
 ALTER TABLE `tbl_chitiethoadon`
   ADD CONSTRAINT `tbl_chitiethoadon_ibfk_1` FOREIGN KEY (`id_sp`) REFERENCES `tbl_sanpham` (`id_sp`),
   ADD CONSTRAINT `tbl_chitiethoadon_ibfk_2` FOREIGN KEY (`id_hd`) REFERENCES `tbl_hoadon` (`id_hd`);
 
 --
--- Constraints for table `tbl_hoadon`
+-- Các ràng buộc cho bảng `tbl_hoadon`
 --
 ALTER TABLE `tbl_hoadon`
   ADD CONSTRAINT `tbl_hoadon_ibfk_1` FOREIGN KEY (`id_kh`) REFERENCES `tbl_khachhang` (`id_kh`);
 
 --
--- Constraints for table `tbl_sanpham`
+-- Các ràng buộc cho bảng `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
   ADD CONSTRAINT `tbl_sanpham_ibfk_2` FOREIGN KEY (`id_hsx`) REFERENCES `tbl_hangsanxuat` (`id_hsx`);

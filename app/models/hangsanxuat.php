@@ -1,5 +1,5 @@
 <?php
-  include("../../config/dbconnect.php");
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/config/dbconnect.php');
   class data_hangsanxuat
   {
     public function hienthi_hangsanxuat(){

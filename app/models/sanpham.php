@@ -1,5 +1,5 @@
 <?php
-  include('../../../config/dbconnect.php');
+  include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");
 
   class data_sanpham
   {
@@ -34,24 +34,9 @@
 
     public function xoa_san_pham($id_sp){
       global $conn;
-      $sql = "UPDATE tbl_sanpham SET is_xoa = 0 WHERE id_sp = $id_sp";
+      $sql = "DELETE FROM tbl_sanpham WHERE id_sp = $id_sp";
       $result = mysqli_query($conn, $sql);
-      if($result){
-        return true;
-      }else{
-        return false;
-      }
-    }
-
-    public function khoi_phuc_san_pham($id_sp){
-      global $conn;
-      $sql = "UPDATE tbl_sanpham SET is_xoa = 1 WHERE id_sp = $id_sp";
-      $result = mysqli_query($conn, $sql);
-      if($result){
-        return true;
-      }else{
-        return false;
-      }
+      return $result;
     }
 
     public function search_sanpham($id_hsx, $tensp){
