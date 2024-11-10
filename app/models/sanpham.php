@@ -3,6 +3,12 @@
 
 class data_sanpham
 {
+    public function hien_thi_sanpham_admin(){
+      global $conn;
+      $sql = "SELECT * FROM tbl_sanpham";
+      $result = mysqli_query($conn, $sql);
+      return $result;
+    }
     // Phương thức để hiển thị sản phẩm với phân trang
     public function hien_thi_sanpham($limit, $offset)
     {
