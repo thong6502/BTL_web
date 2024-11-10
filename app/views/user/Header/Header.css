@@ -23,6 +23,10 @@ a{
     margin: 0;
 }
 
+.inner-menu li:nth-child(2) a:hover{
+    
+}
+
 .inner-menu li {
     margin: 0 20px;
     padding: 0;
@@ -38,4 +42,52 @@ a{
 }
 .header-icon i{
     font-size: 20px;
+}
+
+
+/* CSS cho dropdown và sub-menu */
+.inner-menu {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.inner-menu li {
+    position: relative; /* Để sub-menu nằm chồng lên menu chính */
+}
+
+.inner-menu li a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.inner-menu li a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Sub-menu xuất hiện khi hover vào menu "Sản phẩm" */
+.inner-menu li .dropdown-menu {
+    display: none;  /* Ẩn sub-menu */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    min-width: 180px; /* Đảm bảo sub-menu đủ rộng */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.inner-menu li:hover .dropdown-menu {
+    display: block; /* Hiển thị sub-menu khi hover vào li */
+}
+
+/* Thêm hiệu ứng hover cho sub-menu items */
+.inner-menu li .dropdown-menu li a:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
 }
