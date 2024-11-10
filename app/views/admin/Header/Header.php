@@ -1,4 +1,4 @@
-<header class="header bg-primary text-white p-3">
+<!-- <header class="header bg-primary text-white p-3">
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-md-2 logo">
@@ -9,8 +9,7 @@
             </div>
             <div class="col-md-2">
                 <button class="btn btn-outline-light">Logout</button>
-                <button>hihi</button>
             </div>
         </div>
     </div>
-</header>
+</header> -->

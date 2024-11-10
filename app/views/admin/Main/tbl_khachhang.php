@@ -1,7 +1,8 @@
 <main role="main" class="container">
     <div class="content mt-5">
         <?php
-        include('./../../models/khachhang.php');
+        // include('./../../models/khachhang.php');
+        include('../../../models/khachhang.php');
         $get_data = new data_khachhang();
         $select = $get_data->hien_thi_khachhang();
         ?>

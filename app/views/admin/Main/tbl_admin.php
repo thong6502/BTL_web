@@ -1,7 +1,9 @@
 <main role="main" class="container">
     <div class="content mt-5">
         <?php
-        include('./../../models/admin.php');
+        // include('./../../models/admin.php');
+        include('../../../models/admin.php');
+
         $get_data = new data_admin();
         $select = $get_data->hien_thi_admin();
         ?>
