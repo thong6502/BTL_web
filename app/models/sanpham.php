@@ -1,5 +1,5 @@
 <?php
-  include('../../../config/dbconnect.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/config/dbconnect.php');
 
   class data_sanpham
   {
@@ -60,6 +60,20 @@
       $result = mysqli_query($conn, $sql);
       return $result;
     }
+
+    public function lay_sanpham_theo_id($id) {
+      global $conn;
+      $sql = "SELECT * FROM tbl_sanpham WHERE id_sp = $id"; // Chỉ lấy sản phẩm chưa bị xóa
+      $result = mysqli_query($conn, $sql);
+  
+      if ($result && mysqli_num_rows($result) > 0) {
+          return mysqli_fetch_assoc($result); // Trả về dữ liệu sản phẩm dưới dạng mảng
+      } else {
+          return null; // Trả về null nếu không tìm thấy sản phẩm
+      }
+  }
+  
+
 
   }
 ?>

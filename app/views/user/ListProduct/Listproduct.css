@@ -1,3 +1,72 @@
-.product__item{
+/* Khung sản phẩm với hiệu ứng bóng và hover */
+.box__item {
+    background-color: #ffffff;
     border: 1px solid #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+    height: 100%; /* Đảm bảo chiều cao đồng nhất */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.box__item:hover {
+    transform: translateY(-5px); /* Hiệu ứng nổi lên khi hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bóng đổ đậm hơn khi hover */
+}
+
+/* Liên kết sản phẩm */
+.product__link {
+    text-decoration: none !important;
+    color: #333;
+    display: block;
+    padding: 15px; /* Khoảng cách giữa nội dung và khung */
+    flex-grow: 1; 
+}
+
+/* Hình ảnh sản phẩm */
+.product__image {
+    
+    width: 100%; 
+    border-radius: 15px 15px 0 0; 
+    object-fit: contain; 
+}
+
+.product__info {
+    text-align: center;
+    margin-top: auto; 
+}
+
+.product__price {
+    font-size: 1.2em;
+    color: #28a745; 
+    font-weight: bold;
+}
+
+.product__title {
+    font-size: 1.4em;
+    color: #333;
+    margin-top: 5px;
+    display: block;
+    font-weight: 600;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+
+@media (max-width: 768px) {
+    .product__item {
+        width: 100%;
+    }
+    
+    .product__title {
+        font-size: 1.2em; 
+    }
+    
+    .product__price {
+        font-size: 1em; 
+    }
 }

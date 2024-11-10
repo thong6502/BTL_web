@@ -6,16 +6,16 @@
             </div>
             <div class="col-md-8">
                 <ul class="inner-menu d-flex justify-content-center">
-                    <li><a href="#home">Trang Chủ</a></li>
-                    <li><a href="#products">Sản Phẩm</a></li>
-                    <li><a href="#about">Giới Thiệu</a></li>
-                    <li><a href="#contact">Liên Hệ</a></li>
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="#products">Sản phẩm</a></li>
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
                 </ul>
             </div>
             <div class="col-md-2">
                 <div class="header-icons d-flex justify-content-between">
                     <a href="#search"><i class="fas fa-search"></i></a>
-                    <a href="#cart"><i class="fas fa-shopping-cart"> </i></a>
+                    <a href="/BTL_web/app/views/user/Cart/cart.php"><i class="fas fa-shopping-cart"> </i></a>
                     <div class="dropdown">
                         <a class="btn dropdown p-0" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user"></i>

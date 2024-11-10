@@ -5,23 +5,34 @@
         $get_data = new data_sanpham();
         $select = $get_data->hien_thi_sanpham();
         ?>
-        <div class="row justify-content-between">
-        <?php
-        if (!empty($select)) {
-            foreach ($select as $pr) {
-        ?>
-        <div style="width: 30%;border-radius: 20px;" class="product__item p-3 mb-4">
-            <img src="<?php echo htmlspecialchars($pr['img_path']); ?>" alt=""><br>
-            <b style="font-size: 18px;" class="price"><?php echo htmlspecialchars($pr['giaban']); ?> VND</b><br>
-            <b style="font-size: 22px;" class="title"><?php echo htmlspecialchars($pr['tensp']); ?></b>
-            <div class="desc"><?php echo htmlspecialchars($pr['chitiet']); ?></div>
-        </div>
-        <?php
-            }
-        } else {
-            echo "<tr><td colspan='5'>Không có dữ liệu</td></tr>";
-        }
-        ?>
+        <div class="row justify-content-start">
+            <?php if (!empty($select)) { ?>
+                <?php foreach ($select as $pr) { ?>
+                    <div class="product__item col-md-4 col-sm-6 col-lg-3 mb-4">
+                        <div class="box__item border p-3">
+                            <a href="./DetailProduct/DetailProduct.php?id=<?php echo htmlspecialchars($pr['id_sp']); ?>" class="product__link text-decoration-none">
+                                <img width="100%" src="<?php echo htmlspecialchars($pr['img_path']); ?>" alt="<?php echo htmlspecialchars($pr['tensp']); ?>" class="product__image rounded">
+                                <div class="product__info mt-3 text-center">
+                                    <b class="product__price text-danger"><?php echo number_format(htmlspecialchars($pr['giaban']), 0, ',', '.'); ?> VND</b><br>
+                                    <b class="product__title text-dark">
+                                        <?php
+                                        $short_title = mb_strimwidth($pr['tensp'], 0, 15, "...");
+                                        echo htmlspecialchars($short_title);
+                                        ?>
+                                    </b>
+                                </div>
+                            </a>
+                            <!-- Nút "Thêm vào giỏ hàng" -->
+                            <form method="POST" action="/BTL_web/app/views/user/Cart/add_to_cart.php" class="text-center mt-2">
+                                <input type="hidden" name="id_sp" value="<?php echo htmlspecialchars($pr['id_sp']); ?>">
+                                <button type="submit" class="btn btn-primary btn-sm">🛒 Thêm vào giỏ hàng</button>
+                            </form>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } else { ?>
+                <p>Không có sản phẩm nào.</p>
+            <?php } ?>
         </div>
     </div>
 </main>
