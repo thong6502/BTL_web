@@ -1,92 +1,64 @@
 <?php
-// Kiểm tra nếu có `id_sp` trong POST
-if (isset($_POST['id_sp'])) {
-    $id_sp = $_POST['id_sp'];
+session_start();
 
-    // Lấy thông tin sản phẩm từ cơ sở dữ liệu
-    include($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/app/models/sanpham.php');
-    $get_data = new data_sanpham();
-    $product = $get_data->lay_sanpham_theo_id($id_sp);
+// Bao gồm các tệp cần thiết với đường dẫn tuyệt đối
+include($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/config/dbconnect.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/app/global.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/app/models/sanpham.php'); // Bao gồm lớp sanpham
+include($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/app/models/giohang.php'); // Bao gồm lớp sanpham
 
-    // Kiểm tra xem sản phẩm có tồn tại không
-    if ($product) {
-?>
-        <!DOCTYPE html>
-        <html lang="vi">
+// Khởi tạo đối tượng $get_data
+$get_data = new data_sanpham();
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Thanh toán</title>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        </head>
-
-        <body>
-            <div class="container mt-5">
-                <h2 class="mb-4">Thông tin thanh toán</h2>
-
-                <!-- Thông tin sản phẩm -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($product['tensp']); ?></h5>
-                        <p class="card-text">Giá: <?php echo number_format(htmlspecialchars($product['giaban']), 0, ',', '.'); ?> VND</p>
-                        <input type="hidden" name="id_sp" value="<?php echo htmlspecialchars($product['id_sp']); ?>">
-                    </div>
-                </div>
-
-                <!-- Form thông tin khách hàng -->
-                <form action="confirm_order.php" method="POST">
-                    <input type="hidden" name="id_sp" value="<?php echo htmlspecialchars($product['id_sp']); ?>">
-
-                    <div class="form-group">
-                        <label for="user">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="user" name="user" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hoten">Họ và tên</label>
-                        <input type="text" class="form-control" id="hoten" name="hoten" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="diachi">Địa chỉ</label>
-                        <input type="text" class="form-control" id="diachi" name="diachi" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sdt">Số điện thoại</label>
-                        <input type="text" class="form-control" id="sdt" name="sdt" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email (Tùy chọn)</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </div>
-
-                    <h5 class="mt-4">Tổng tiền: <?php echo number_format(htmlspecialchars($product['giaban']), 0, ',', '.'); ?> VND</h5>
-
-                    <button type="submit" class="btn btn-success mt-3">Xác nhận đặt hàng</button>
-
-                    <a href="/BTL_web/app/views/user/user.php" class="btn btn-secondary mt-3">🔙 Quay về</a>
-
-                </form>
-            </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-        </body>
-
-        </html>
-<?php
-    } else {
-        echo "Không tìm thấy sản phẩm.";
-    }
-} else {
-    echo "ID sản phẩm không hợp lệ.";
+// Kiểm tra giỏ hàng
+$cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+if (empty($cart_items)) {
+    echo "Giỏ hàng trống. Không thể tiến hành thanh toán.";
+    exit;
 }
+
+// Kiểm tra người dùng đã đăng nhập chưa
+$id_kh = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+if (!$id_kh) {
+    echo "Vui lòng đăng nhập để tiến hành thanh toán.";
+    exit;
+}
+
+// Tính tổng tiền của giỏ hàng
+$total_price = 0;
+foreach ($cart_items as $item) {
+    $product = $get_data->lay_sanpham_theo_id($item['id_sp']);
+    if ($product) {
+        $total_price += $item['quantity'] * $product['giaban'];
+    }
+}
+
+// Tạo hóa đơn mới
+$sql_create_order = "INSERT INTO tbl_hoadon (id_kh, ngay_ban, tongtien) VALUES ($id_kh, NOW(), $total_price)";
+if (mysqli_query($conn, $sql_create_order)) {
+    $id_hd = mysqli_insert_id($conn); // Lấy id_hd của hóa đơn vừa tạo
+} else {
+    echo "Lỗi khi tạo hóa đơn: " . mysqli_error($conn);
+    exit;
+}
+
+// Thêm sản phẩm vào chi tiết hóa đơn
+foreach ($cart_items as $item) {
+    $id_sp = $item['id_sp'];
+    $quantity = $item['quantity'];
+    $sql_add_to_order_details = "INSERT INTO tbl_chitiethoadon (id_hd, id_sp, soluong) VALUES ($id_hd, $id_sp, $quantity)";
+    if (!mysqli_query($conn, $sql_add_to_order_details)) {
+        echo "Lỗi khi thêm sản phẩm vào chi tiết hóa đơn: " . mysqli_error($conn) . "<br>";
+        exit;
+    }
+}
+
+// Xóa giỏ hàng sau khi thanh toán thành công
+unset($_SESSION['cart']); // Giỏ hàng đã được thanh toán, xóa nó đi
+
+// Hiển thị thông báo thanh toán thành công
+echo "<div class='container mt-5'>";
+echo "<div class='alert alert-success'>Thanh toán thành công! Cảm ơn bạn đã mua hàng.</div>";
+echo "<a href='/BTL_web/app/views/user/user.php' class='btn btn-primary'>🔙 Quay về trang chủ</a>";
+echo "</div>";
 ?>

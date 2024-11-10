@@ -43,7 +43,7 @@ $total_price = 0;
                             $total_price += $total;
                     ?>
                             <tr>
-                            
+
                                 <td><?php echo htmlspecialchars($product['tensp']); ?></td>
                                 <td><?php echo number_format($product['giaban'], 0, ',', '.'); ?> VND</td>
                                 <td>
@@ -66,8 +66,11 @@ $total_price = 0;
                 </tbody>
             </table>
             <h4 class="text-right">Tổng tiền: <?php echo number_format($total_price, 0, ',', '.'); ?> VND</h4>
-            <a href="checkout.php" class="btn btn-success mt-3 float-right">Thanh toán</a>
-            
+            <form method="POST" action="/BTL_web/app/views/user/confirm_order/confirm_order.php" style="display: inline;">
+                <button type="submit" class="btn btn-danger mt-3 ml-2">💳 Thanh toán</button>
+            </form>
+
+
         <?php } else { ?>
             <p>Giỏ hàng của bạn đang trống.</p>
         <?php } ?>

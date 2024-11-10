@@ -3,6 +3,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/config/dbconnect.php');
 
   class data_sanpham
   {
+    
     public function hien_thi_sanpham(){
       global $conn;
       $sql = "SELECT * FROM tbl_sanpham";

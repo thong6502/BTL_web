@@ -5,6 +5,18 @@
         $get_data = new data_sanpham();
         $select = $get_data->hien_thi_sanpham();
         ?>
+        
+        <!-- Hiển thị thông báo thành công nếu có -->
+        <?php if (isset($_SESSION['success_message'])) { ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['success_message']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php unset($_SESSION['success_message']); // Xóa thông báo sau khi hiển thị ?>
+        <?php } ?>
+
         <div class="row justify-content-start">
             <?php if (!empty($select)) { ?>
                 <?php foreach ($select as $pr) { ?>
