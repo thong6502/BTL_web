@@ -72,11 +72,11 @@
             }else{
                 $gif_file_paths = [];
 
-                for ($i = 1; $i < 31; $i++) {
+                for ($i = 1; $i < 36; $i++) {
                     $gif_file_paths[] = "/BTL_web/public/gif/{$i}.gif";
                 }
                 shuffle($gif_file_paths);
-                $index_random = rand(5,10);
+                $index_random = rand(5,10) + rand(10,15);
                 $random_file_path = $gif_file_paths[$index_random];
                 echo "<img style='width: 50%; height: 60vh; object-fit: contain;' src='{$random_file_path}'>";
             }
