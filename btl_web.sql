@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2024 at 07:36 AM
+-- Generation Time: Nov 11, 2024 at 08:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,20 +39,28 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id_admin`, `user`, `password`) VALUES
 (1, 'admin1', 'password1'),
-(2, 'admin2', 'password2');
+(2, 'admin2', 'password2'),
+(3, 'admin', '123456');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banner`
+-- Table structure for table `tbl_banner`
 --
 
-CREATE TABLE `banner` (
+CREATE TABLE `tbl_banner` (
   `id_banner` int(11) NOT NULL,
-  `img_path` varchar(250) NOT NULL,
-  `title` varchar(250) NOT NULL,
-  `txt` varchar(250) NOT NULL
+  `img_path` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_banner`
+--
+
+INSERT INTO `tbl_banner` (`id_banner`, `img_path`) VALUES
+(1, '/BTL_web/public/imgs/banner-1.jpg'),
+(2, '/BTL_web/public/imgs/banner-2.jpg'),
+(3, '/BTL_web/public/imgs/banner-3.jpg');
 
 -- --------------------------------------------------------
 
@@ -66,6 +74,57 @@ CREATE TABLE `tbl_chitiethoadon` (
   `id_sp` int(10) NOT NULL,
   `soluong` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_chitiethoadon`
+--
+
+INSERT INTO `tbl_chitiethoadon` (`id_chitiethoadon`, `id_hd`, `id_sp`, `soluong`) VALUES
+(12, 3, 11, 1),
+(13, 1, 17, 2),
+(14, 2, 27, 1),
+(15, 3, 23, 1),
+(16, 9, 24, 1),
+(17, 10, 16, 1),
+(18, 4, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_chuchay`
+--
+
+CREATE TABLE `tbl_chuchay` (
+  `id_textchay` int(11) NOT NULL,
+  `text` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_chuchay`
+--
+
+INSERT INTO `tbl_chuchay` (`id_textchay`, `text`) VALUES
+(1, 'Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_footer`
+--
+
+CREATE TABLE `tbl_footer` (
+  `id_footer` int(11) NOT NULL,
+  `diachi` varchar(50) NOT NULL,
+  `lienhe` varchar(15) NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_footer`
+--
+
+INSERT INTO `tbl_footer` (`id_footer`, `diachi`, `lienhe`, `email`) VALUES
+(1, '123 Đường ABC, Thành phố XYZ', '(+84)49458457', 'shopdienthoai@example.com');
 
 -- --------------------------------------------------------
 
@@ -147,7 +206,19 @@ INSERT INTO `tbl_khachhang` (`id_kh`, `user`, `password`, `hoten`, `diachi`, `sd
 (7, 'khachhang7', 'password7', 'Bùi Văn G', '104 Đường G, Quận H, Cần Thơ', '0922334455'),
 (8, 'khachhang8', 'password8', 'Đoàn Thị H', '105 Đường H, Quận I, Hà Nội', '0966778899'),
 (9, 'khachhang9', 'password9', 'Ngô Văn I', '106 Đường I, Quận J, TP.HCM', '0955566778'),
-(10, 'khachhang10', 'password10', 'Phan Thị J', '107 Đường J, Quận K, Hải Phòng', '0944455667');
+(10, 'khachhang10', 'password10', 'Phan Thị J', '107 Đường J, Quận K, Hải Phòng', '0944455667'),
+(11, 'user', '123456', 'Trần Hoàng Sơn', 'Hiệp Hòa Bắc Giang', '0929748364');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_logo`
+--
+
+CREATE TABLE `tbl_logo` (
+  `id_logo` int(11) NOT NULL,
+  `img_path_logo` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -195,25 +266,7 @@ INSERT INTO `tbl_sanpham` (`id_sp`, `id_hsx`, `tensp`, `giaban`, `img_path`, `mo
 (31, 5, 'Điện thoại XOR', 130000000, '/BTL_web/public/imgs/dk3.jpg', 'Điện thoại cao cấp, bảo mật cao, thiết kế thủ công, chức năng cơ bản.', 'XOR VIỆT NAM, XOR CHÍNH HÃNG,\r\nXOR Titanium X2 Marine \r\n\r\nTình Trạng: New 2024 Full Box\r\nChất Liệu: Titanium, Gốm Ceramic, Kính Sapphire\r\nPhụ Kiện: Full box đầy đủ phụ kiện\r\nBảo Hành: Chính hãng toàn cầu 2 năm\r\nGiá Rẻ Nhất Thị Trường đã bao gồm VAT\r\nXuất hóa đơn VAT theo yêu cầu\r\nHoàng Luxury - Đại Lý Ủy Quyền Của XOR'),
 (32, 5, 'Vertu Signature S Yellow Gold Ceramic', 25000000, '/BTL_web/public/imgs/dk4.jpg', 'Điện thoại siêu sang, chất liệu vàng và ceramic, thiết kế tinh xảo.', 'Khung máy là vàng nguyên khối chính hãng, tán ốc vàng nguyên khối.\r\n\r\nKính phím vàng nguyên khối, lưng gốm Ceramic siêu cứng, màu đen bóng sang trọng và đẳng cấp.\r\n\r\nMàn hình Sapphire nguyên khối siêu chống xước, bao da zin hãng khoá vàng khối.\r\n\r\nVertu Signature S Yellow Gold Ceramic được chế tác hoàn toàn thủ công, nghệ nhân trình độ cao lắp ráp, hoàn thiện với độ trau chuốt và tỉ mỉ đến từng chi tiết.'),
 (33, 5, 'Điện thoại IP WiFi Fanvil W611W', 5000000, '/BTL_web/public/imgs/dk6.jpg', 'Điện thoại IP, hỗ trợ WiFi, dùng cho liên lạc nội bộ và văn phòng.', '- Màn hình màu 2,4\" 240 x 320 với giao diện người dùng trực quan\r\n\r\n- Mức độ bảo vệ cao IP67\r\n\r\n- Wi-Fi băng tần kép 802.11 a/b/g/n/ac/ax Wi-Fi (Wi-Fi 6, 2.4GHz & 5GHz)\r\n\r\n- Chuyển vùng IEEE802.11k/v/r\r\n\r\n- Mã hóa WPA/WPA2-PSK và 802.1X EAP để đảm bảo an ninh truyền thông\r\n\r\n- Nút bấm để nói (PTT) để quay số nhanh\r\n\r\n- Thời gian đàm thoại lên tới 9 giờ và thời gian chờ lên tới 200 giờ\r\n\r\n \r\n\r\nĐược trang bị pin sạc 1900mAh, W611W sẵn sàng cho thời gian đàm thoại 9 giờ hoặc thời gian chờ 200 giờ. W611W được sử dụng rộng rãi trong nhiều trường hợp khác nhau như doanh nghiệp, trung tâm mua sắm, khu dân cư, khách sạn và nhà kho, mang đến cho người dùng trải nghiệm liên lạc di động chất lượng cao'),
-(34, 5, '', 6000000, '/BTL_web/public/imgs/dk6.jpg', '', '');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `txt_chay`
---
-
-CREATE TABLE `txt_chay` (
-  `id_textchay` int(11) NOT NULL,
-  `text` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `txt_chay`
---
-
-INSERT INTO `txt_chay` (`id_textchay`, `text`) VALUES
-(0, 'Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng');
 
 --
 -- Indexes for dumped tables
@@ -226,9 +279,9 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indexes for table `banner`
+-- Indexes for table `tbl_banner`
 --
-ALTER TABLE `banner`
+ALTER TABLE `tbl_banner`
   ADD PRIMARY KEY (`id_banner`);
 
 --
@@ -238,6 +291,18 @@ ALTER TABLE `tbl_chitiethoadon`
   ADD PRIMARY KEY (`id_chitiethoadon`),
   ADD KEY `id_sp` (`id_sp`),
   ADD KEY `id_hd` (`id_hd`);
+
+--
+-- Indexes for table `tbl_chuchay`
+--
+ALTER TABLE `tbl_chuchay`
+  ADD PRIMARY KEY (`id_textchay`);
+
+--
+-- Indexes for table `tbl_footer`
+--
+ALTER TABLE `tbl_footer`
+  ADD PRIMARY KEY (`id_footer`);
 
 --
 -- Indexes for table `tbl_hangsanxuat`
@@ -259,6 +324,12 @@ ALTER TABLE `tbl_khachhang`
   ADD PRIMARY KEY (`id_kh`);
 
 --
+-- Indexes for table `tbl_logo`
+--
+ALTER TABLE `tbl_logo`
+  ADD PRIMARY KEY (`id_logo`);
+
+--
 -- Indexes for table `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
@@ -273,19 +344,31 @@ ALTER TABLE `tbl_sanpham`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `banner`
+-- AUTO_INCREMENT for table `tbl_banner`
 --
-ALTER TABLE `banner`
-  MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_banner`
+  MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_chitiethoadon`
 --
 ALTER TABLE `tbl_chitiethoadon`
-  MODIFY `id_chitiethoadon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_chitiethoadon` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `tbl_chuchay`
+--
+ALTER TABLE `tbl_chuchay`
+  MODIFY `id_textchay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_footer`
+--
+ALTER TABLE `tbl_footer`
+  MODIFY `id_footer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_hangsanxuat`
@@ -303,7 +386,13 @@ ALTER TABLE `tbl_hoadon`
 -- AUTO_INCREMENT for table `tbl_khachhang`
 --
 ALTER TABLE `tbl_khachhang`
-  MODIFY `id_kh` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_kh` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_logo`
+--
+ALTER TABLE `tbl_logo`
+  MODIFY `id_logo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_sanpham`
