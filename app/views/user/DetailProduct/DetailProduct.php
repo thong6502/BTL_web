@@ -21,6 +21,7 @@ if (isset($_GET['id'])) {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Chi tiết sản phẩm</title>
+            <link rel="shortcut icon" href="/BTL_web/public/imgs/favicon.ico" type="image/x-icon">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -66,7 +67,6 @@ if (isset($_GET['id'])) {
                             <!-- Nút "Mua ngay" chuyển hướng đến trang thanh toán -->
                             <form method="POST" action="/BTL_web/app/views/user/confirm_order/confirm_order.php" style="display: inline;">
                                 <input type="hidden" name="id_sp" value="<?php echo htmlspecialchars($product['id_sp']); ?>">
-                                <button type="submit" class="btn btn-danger mt-3 ml-2">💳 Mua ngay</button>
                             </form>
                         </div>
                     </div>

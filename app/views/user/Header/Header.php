@@ -43,31 +43,43 @@
                 </ul>
             </div>
 
-            <!-- Icons & Dropdown (Giỏ hàng, Tìm kiếm, Tài khoản) -->
             <div class="col-6 col-md-6 col-lg-2">
-                <div class="header-icons d-flex justify-content-between">
-                    <!-- Icon Tìm kiếm -->
-                    <a href="#search"><i class="fas fa-search"></i></a>
+    <div class="header-icons d-flex justify-content-between">
+        <!-- Icon Tìm kiếm
+        <a href="#search"><i class="fas fa-search"></i></a> -->
+        &nbsp;
 
-                    <!-- Icon Giỏ hàng -->
-                    <a href="/BTL_web/app/views/user/Cart/cart.php"><i class="fas fa-shopping-cart"></i></a>
+        <!-- Icon Giỏ hàng -->
+        <a href="/BTL_web/app/views/user/Cart/cart.php"><i class="fas fa-shopping-cart"></i></a>
 
-                    <!-- Dropdown Tài khoản -->
-                    <div class="dropdown">
-                        <a class="btn dropdown p-0" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user"></i>
-                        </a>
-                        <div class="dropdown-menu">
-                            <?php if (isset($_SESSION['user_id'])) { ?>
-                                <a class="dropdown-item" href="/BTL_web/app/views/user/logout.php">Logout</a>
-                            <?php } else { ?>
-                                <a class="dropdown-item" href="/BTL_web/app/views/user/login.php">Login</a>
-                                <a class="dropdown-item" href="/BTL_web/app/views/user/register.php">Register</a>
-                            <?php } ?>
-                        </div>
-                    </div>
+        <!-- Dropdown Tài khoản -->
+        <div class="dropdown">
+            <!-- <?php if (isset($_SESSION['user_id'])) { 
+                // Lấy thông tin khách hàng từ session hoặc database
+                $username = $_SESSION['username'];
+            ?> -->
+                <!-- Icon tài khoản (đăng nhập) -->
+                <a class="btn dropdown p-0" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-check"></i> <!-- Icon khi đã đăng nhập -->
+                    <span>&nbsp;<?= htmlspecialchars($username) ?></span> <!-- Hiển thị tên người dùng -->
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/BTL_web/app/views/user/logout.php">Đăng xuất</a>
                 </div>
-            </div>
+            <?php } else { ?>
+                <!-- Icon tài khoản (chưa đăng nhập) -->
+                <a class="btn dropdown p-0" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user"></i> <!-- Icon khi chưa đăng nhập -->
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/BTL_web/app/views/user/login.php">Đăng nhập</a>
+                    <a class="dropdown-item" href="/BTL_web/app/views/user/register.php">Đăng ký</a>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 </header>

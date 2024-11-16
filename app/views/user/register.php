@@ -19,14 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (mysqli_num_rows($result_check) > 0) {
         $error_message = "Tên đăng nhập đã tồn tại.";
     } else {
-        // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Nếu tên đăng nhập chưa tồn tại, thực hiện đăng ký
         $sql_insert = "INSERT INTO tbl_khachhang (user, password, hoten, diachi, sdt) 
                         VALUES (?, ?, ?, ?, ?)";
         $stmt_insert = mysqli_prepare($conn, $sql_insert);
-        mysqli_stmt_bind_param($stmt_insert, "sssss", $username, $hashed_password, $fullname, $address, $phone);
+        mysqli_stmt_bind_param($stmt_insert, "sssss", $username, $password, $fullname, $address, $phone);
         
         if (mysqli_stmt_execute($stmt_insert)) {
             $success_message = "Đăng ký thành công. Bạn có thể đăng nhập ngay bây giờ.";
