@@ -25,93 +25,26 @@
     <?php
     include("./Header/Header.php")
     ?>
-    <marquee style="font-size: 20px;font-weight: bold;color: orange;" class="slogan">Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng</marquee>
+    <?php
+        include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");
+        include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/app/models/chuchay.php");
+
+        // Create an instance of the data_chuchay class
+        $chuchay_data = new data_chuchay();
+        $chuchay_result = $chuchay_data->hienthi_chuchay();
+
+        // Combine all rows into one string for scrolling
+        $scrolling_text = '';
+        while ($row = mysqli_fetch_assoc($chuchay_result)) {
+            $scrolling_text .= htmlspecialchars($row['noidung']) . ' | '; // Add text with a separator
+        }
+        $scrolling_text = rtrim($scrolling_text, ' | '); // Remove the trailing separator
+    ?>
+    <marquee style="font-size: 20px; font-weight: bold; color: orange;" class="slogan"><?php echo htmlspecialchars($scrolling_text); ?></marquee>
     <?php
             include("./Slider/Slider.php")
     ?>
-    <div class="section_six mt-5">
-    <div class="container p-5">
-        <h2 class="inner_title text-center p-3" style="font-weight: bold!important;">
-            CÁC SẢN PHẨM BÁN CHẠY
-        </h2>
-        <div class="product-slider">
-            <div class="slider-item">
-                <div class="box-product card border-0">
-                    <img src="./img/section_6-1.png" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <h5 class="card-title box-title">RD-0900TS1.E</h5>
-                        <a href="" class="btn btn-dark btn_product">Xem thêm <i class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-item">
-                <div class="box-product card border-0">
-                    <img src="./img/section_6-2.png" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <h5 class="card-title box-title">RD-0900TS1.S</h5>
-                        <a href="" class="btn btn-dark btn_product">Xem thêm <i class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-item">
-                <div class="box-product card border-0">
-                    <img src="./img/section_6-3.png" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <h5 class="card-title box-title">RD-1300 TS2.E</h5>
-                        <a href="" class="btn btn-dark btn_product">Xem thêm <i class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-item">
-                <div class="box-product card border-0">
-                    <img src="./img/section_6-4.png" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <h5 class="card-title box-title">RD-0540N1.E</h5>
-                        <a href="" class="btn btn-dark btn_product">Xem thêm <i class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-item">
-                <div class="box-product card border-0">
-                    <img src="./img/section_6-1.png" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <h5 class="card-title box-title">RD-0900TS2.E</h5>
-                        <a href="" class="btn btn-dark btn_product">Xem thêm <i class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-item">
-                <div class="box-product card border-0">
-                    <img src="./img/section_6-2.png" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <h5 class="card-title box-title">RD-0900TS2.S</h5>
-                        <a href="" class="btn btn-dark btn_product">Xem thêm <i class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-item">
-                <div class="box-product card border-0">
-                    <img src="./img/section_6-3.png" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <h5 class="card-title box-title">RD-1300 TS3.E</h5>
-                        <a href="" class="btn btn-dark btn_product">Xem thêm <i class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-item">
-                <div class="box-product card border-0">
-                    <img src="./img/section_6-4.png" class="card-img-top" alt="Product">
-                    <div class="card-body text-center">
-                        <h5 class="card-title box-title">RD-0540N2.E</h5>
-                        <a href="" class="btn btn-dark btn_product">Xem thêm <i class="fas fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+   
     <div class="content" style="height: fit-content">
         <div class="container">
             <?php
@@ -171,108 +104,3 @@ $(document).ready(function(){
 
 
 
-<style>
-.product-slider {
-    padding: 20px;
-    margin: 0 -15px;
-}
-
-.slider-item {
-    padding: 0 15px;
-}
-
-.box-product {
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
-    border-radius: 30px;
-}
-
-.box-product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
-}
-
-.box-title {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-
-.slick-prev, 
-.slick-next {
-    width: 40px;
-    height: 40px;
-    background: #9e9e9e;
-    border-radius: 50%;
-    z-index: 1;
-    transition: all 0.3s ease;
-}
-
-.slick-prev {
-    left: -10px;
-}
-
-.slick-next {
-    right: -10px;
-}
-
-.slick-prev:before,
-.slick-next:before {
-    font-size: 20px;
-    opacity: 1;
-}
-
-.slick-prev:hover,
-.slick-next:hover {
-    background: #adadad;
-}
-
-.slick-dots {
-    bottom: -40px;
-}
-
-.slick-dots li button:before {
-    font-size: 10px;
-}
-
-.slick-dots li.slick-active button:before {
-    color: #000;
-}
-
-.btn_product {
-    padding: 8px 20px;
-    transition: all 0.3s ease;
-    background-color: #A2E5BB;
-    color: #0E7F40;
-}
-
-.btn_product:hover {
-    color: rgb(215, 215, 215);
-    background-color: #0E7F40;
-    transform: translateY(-2px);
-}
-
-.slick-dots li button:before {
-    font-size: 12px;
-    color: #ccc;
-}
-
-.slick-dots li.slick-active button:before {
-    color: #000;
-}
-
-@media (max-width: 767px) {
-    .product-slider {
-        padding: 10px;
-    }
-    
-    .box-title {
-        font-size: 1rem;
-    }
-    
-    .btn-dark {
-        padding: 6px 15px;
-        font-size: 14px;
-    }
-}
-</style>

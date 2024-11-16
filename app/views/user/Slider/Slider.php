@@ -1,15 +1,27 @@
+<?php
+    include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");
+    include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/app/models/banner.php");
+
+// Create an instance of the data_banner class
+$banner_data = new data_banner();
+$banners = $banner_data->hienthi_banner();
+?>
+
 <div class="slider">
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" data-interval="3000">
-                <img src="../../../public/imgs/banner-1.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" data-interval="3000">
-                <img src="../../../public/imgs/banner-2.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="../../../public/imgs/banner-3.jpg" class="d-block w-100  " alt="...">
-            </div>
+            <?php
+            $isActive = true; // To set the first item as active
+            while ($row = mysqli_fetch_assoc($banners)) {
+                $img_path = $row['img_path'];
+                ?>
+                <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>" data-interval="3000">
+                    <img src="<?php echo htmlspecialchars($img_path); ?>" class="d-block w-100" alt="Banner">
+                </div>
+                <?php
+                $isActive = false; // Only the first item should have the 'active' class
+            }
+            ?>
         </div>
         <button class="carousel-control-prev" type="button" data-target="#carouselExampleInterval" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

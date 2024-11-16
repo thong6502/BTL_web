@@ -1,10 +1,25 @@
+<?php 
+   include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");
+   include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/app/models/logo.php");
+
+   $get_logo = new data_logo();
+   $logo_result = $get_logo->hienthi_logo();
+   $logo_path = '/BTL_web/public/imgs/default-logo.png'; // Default logo path
+
+   if ($logo_result && mysqli_num_rows($logo_result) > 0) {
+       $logo_data = mysqli_fetch_assoc($logo_result);
+       $logo_path = htmlspecialchars($logo_data['img_path']); // Ensure safe output
+   }
+?>
+
 <header class="header p-4">
     <div class="container">
         <div class="row align-items-center">
             <!-- Logo -->
             <div class="col-6 col-md-6 col-lg-2 logo">
                 <a class="d-flex align-items-center" href="/BTL_web/app/views/user/user.php">
-                    <img width="55" height="55" src="/BTL_web/public/imgs/logo.png" alt="Logo Shop" class="img-fluid"><span><b>&nbsp;Phone Store</b></span>
+                    <img width="55" height="55" src="<?= $logo_path ?>" alt="Logo Shop" class="img-fluid">
+                    <span><b>&nbsp;Phone Store</b></span>
                 </a>
             </div>
 
@@ -29,7 +44,7 @@
             </div>
 
             <!-- Icons & Dropdown (Giỏ hàng, Tìm kiếm, Tài khoản) -->
-            <div class="col-6 col-md-6 col-lg-2 ">
+            <div class="col-6 col-md-6 col-lg-2">
                 <div class="header-icons d-flex justify-content-between">
                     <!-- Icon Tìm kiếm -->
                     <a href="#search"><i class="fas fa-search"></i></a>
