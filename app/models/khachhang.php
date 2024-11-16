@@ -1,5 +1,5 @@
 <?php
-  include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");//dẫn tuyệt đối
+  include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");
   include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/app/global.php");  
 
   class data_khachhang
@@ -48,27 +48,57 @@
       }
   }
 
-  public function xoa_khach_hang($id_kh){
+public function xoa_khachhang($id_kh){
     global $conn;
-    $sql = "UPDATE tbl_khachhang SET is_xoa = 1 WHERE id_kh = '$id_kh'";
-    $result = mysqli_query($conn,$sql);
-    if($result){
-      return true;
-    }else{
-      return false;
-    }
-  }
 
-  public function khoi_phuc_khach_hang($id_kh){
-    global $conn;
-    $sql = "UPDATE tbl_khachhang SET is_xoa = 0 WHERE id_kh = '$id_kh'";
-    $result = mysqli_query($conn,$sql);
-    if($result){
-      return true;
-    }else{
-      return false;
+    mysqli_begin_transaction($conn);
+
+    try {
+        $sql_lay_id_hd = "SELECT id_hd FROM tbl_hoadon WHERE id_kh = $id_kh";
+        $result_id_hd = mysqli_query($conn, $sql_lay_id_hd);
+
+        if (!$result_id_hd) {
+            throw new Exception("Lỗi lấy danh sách hóa đơn: " . mysqli_error($conn));
+        }
+
+        while ($row_hd = mysqli_fetch_assoc($result_id_hd)) {
+            $id_hd = $row_hd['id_hd'];
+            $sql_xoa_cthd = "DELETE FROM tbl_chitiethoadon WHERE id_hd = $id_hd";
+            $result_xoa_cthd = mysqli_query($conn, $sql_xoa_cthd);
+            if (!$result_xoa_cthd) {
+                throw new Exception("Lỗi xóa chi tiết hóa đơn: " . mysqli_error($conn));
+            }
+        }
+
+
+        // Xóa hóa đơn liên quan
+        $sql_xoa_hd = "DELETE FROM tbl_hoadon WHERE id_kh = $id_kh";
+        $result_xoa_hd = mysqli_query($conn, $sql_xoa_hd);
+
+        if (!$result_xoa_hd) {
+            throw new Exception("Lỗi xóa hóa đơn: " . mysqli_error($conn));
+        }
+
+        // Xóa khách hàng
+        $sql_xoa_kh = "DELETE FROM tbl_khachhang WHERE id_kh = $id_kh";
+        $result_xoa_kh = mysqli_query($conn, $sql_xoa_kh);
+
+        if (!$result_xoa_kh) {
+            throw new Exception("Lỗi xóa khách hàng: " . mysqli_error($conn));
+        }
+
+        // Commit transaction nếu tất cả thành công
+        mysqli_commit($conn);
+        return true;
+
+    } catch (Exception $e) {
+        // Rollback nếu có lỗi
+        mysqli_rollback($conn);
+        error_log("Lỗi xóa khách hàng: " . $e->getMessage());
+        return false;
     }
-  }
+}
+
 
   public function search_khach_hang_by_ten($hoten){
     global $conn;

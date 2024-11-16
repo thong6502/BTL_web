@@ -8,9 +8,27 @@
       $result = mysqli_query($conn, $sql);
       return $result;
     }
-    public function search_id_hsx_by_name($tenhsx){
+    public function them_hang_san_xuat($tenhsx){
       global $conn;
-      $sql = "SELECT id_hsx FROM tbl_hangsanxuat WHERE tenhsx LIKE '%$tenhsx%'";
+      $sql = "INSERT INTO tbl_hangsanxuat (tenhsx) VALUES ('$tenhsx')";
+      $result = mysqli_query($conn, $sql);
+      return $result;
+    }
+    public function sua_hang_san_xuat($id_hsx, $tenhsx){
+      global $conn;
+      $sql = "UPDATE tbl_hangsanxuat SET tenhsx = '$tenhsx' WHERE id_hsx = $id_hsx";
+      $result = mysqli_query($conn, $sql);
+      return $result;
+    }
+    public function xoa_hang_san_xuat($id_hsx){
+      global $conn;
+      $sql = "DELETE FROM tbl_hangsanxuat WHERE id_hsx = $id_hsx";
+      $result = mysqli_query($conn, $sql);
+      return $result;
+    }
+    public function search_hang_san_xuat_by_id($id_hsx){
+      global $conn;
+      $sql = "SELECT * FROM tbl_hangsanxuat WHERE id_hsx = $id_hsx";
       $result = mysqli_query($conn, $sql);
       return $result;
     }

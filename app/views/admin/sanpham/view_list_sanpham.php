@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./sanpham/view_list_sanpham.css">
+<link rel="stylesheet" href="/BTL_web/app/views/admin/sanpham/view_list_sanpham.css">
 <?php
   include_once($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/app/controllers/Admin/sanphamController/hienthi_sanpham_controller.php');
   global $result;
@@ -21,8 +21,8 @@
             echo "  <td>{$row['tensp']}</td>";
             echo "  <td>{$row['giaban']}</td>";
             echo "  <td class = 'multi-line-text'>{$row['chitiet']}</td>";
-            echo "  <td><a href='#'><button>Sửa</button></a></td>";
-            echo "  <td><a href='#'><button>Xóa</button></a></td>";
+            echo "  <td><a href='./?id_sp={$row['id_sp']}&page=sua_sanpham'><button type='button'>Sửa</button></a></td>";
+            echo "  <td><a href='/BTL_web/app/controllers/Admin/sanphamController/xoa_sanpham_controller.php?id_sp={$row['id_sp']}'><button>Xóa</button></a></td>";
             echo "</tr>";
           }
         ?>

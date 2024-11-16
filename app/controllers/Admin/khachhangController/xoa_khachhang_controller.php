@@ -1,10 +1,7 @@
 <?php
-  include("../../../models/khachhang.php");
+  include_once($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/app/models/khachhang.php');
   $khachhang = new data_khachhang();
-  $success = $khachhang->xoa_khach_hang($_POST["id_kh"]);
-  if($success){
-    echo "Xóa thành công";
-  }else{
-    echo '<script>alert("Xóa thất bại");</script>;'
-  }
+  $success = $khachhang->xoa_khachhang($_GET["id_kh"]);
+  echo '<script>alert("Xóa thành công"); window.location.href = "/BTL_web/app/views/admin/?page=qlkhachhang";</script>';
+
 ?>

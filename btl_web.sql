@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 11, 2024 lúc 03:43 PM
+-- Thời gian đã tạo: Th10 16, 2024 lúc 08:54 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -60,7 +60,7 @@ CREATE TABLE `tbl_banner` (
 INSERT INTO `tbl_banner` (`id_banner`, `img_path`) VALUES
 (1, '/BTL_web/public/imgs/banner-1.jpg'),
 (2, '/BTL_web/public/imgs/banner-2.jpg'),
-(3, '/BTL_web/public/imgs/banner-3.jpg');
+(5, '/BTL_web/public/imgs/banner-3.jpg');
 
 -- --------------------------------------------------------
 
@@ -80,12 +80,8 @@ CREATE TABLE `tbl_chitiethoadon` (
 --
 
 INSERT INTO `tbl_chitiethoadon` (`id_chitiethoadon`, `id_hd`, `id_sp`, `soluong`) VALUES
-(12, 3, 11, 1),
 (13, 1, 17, 2),
 (14, 2, 27, 1),
-(15, 3, 23, 1),
-(16, 9, 24, 1),
-(17, 10, 16, 1),
 (18, 4, 1, 1);
 
 -- --------------------------------------------------------
@@ -96,16 +92,15 @@ INSERT INTO `tbl_chitiethoadon` (`id_chitiethoadon`, `id_hd`, `id_sp`, `soluong`
 
 CREATE TABLE `tbl_chuchay` (
   `id_textchay` int(11) NOT NULL,
-  `text` varchar(255) NOT NULL
+  `noidung` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_chuchay`
 --
 
-INSERT INTO `tbl_chuchay` (`id_textchay`, `text`) VALUES
-(1, 'Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng'),
-(2, '\'Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng\'');
+INSERT INTO `tbl_chuchay` (`id_textchay`, `noidung`) VALUES
+(1, 'Vui Halloween, gạt bỏ tự ti, tự tin tỏa sáng');
 
 -- --------------------------------------------------------
 
@@ -125,7 +120,7 @@ CREATE TABLE `tbl_footer` (
 --
 
 INSERT INTO `tbl_footer` (`id_footer`, `diachi`, `lienhe`, `email`) VALUES
-(1, '123 Đường ABC, Thành phố XYZ', '(+84)49458457', 'shopdienthoai@example.com');
+(1, '123 Đường ABC, Thành phố 123', '(+84)49458457', 'shopdienthoai@example.com');
 
 -- --------------------------------------------------------
 
@@ -169,14 +164,8 @@ CREATE TABLE `tbl_hoadon` (
 INSERT INTO `tbl_hoadon` (`id_hd`, `id_kh`, `ngay_ban`, `tongtien`) VALUES
 (1, 1, '2023-01-10', 38000000),
 (2, 2, '2023-02-15', 20000000),
-(3, 3, '2023-03-20', 12000000),
 (4, 4, '2023-04-25', 7000000),
-(5, 5, '2023-05-30', 25000000),
-(6, 6, '2023-06-10', 85000000),
-(7, 7, '2023-07-15', 3000000),
-(8, 8, '2023-08-20', 15000000),
-(9, 9, '2023-09-25', 5000000),
-(10, 10, '2023-10-30', 18000000);
+(5, 5, '2023-05-30', 25000000);
 
 -- --------------------------------------------------------
 
@@ -202,12 +191,7 @@ INSERT INTO `tbl_khachhang` (`id_kh`, `user`, `password`, `hoten`, `diachi`, `sd
 (2, 'khachhang2', 'password2', 'Trần Thị B', '456 Đường B, Quận C, Hà Nội', '0987654321'),
 (3, 'khachhang3', 'password3', 'Lê Văn C', '789 Đường C, Quận D, Đà Nẵng', '0932123456'),
 (4, 'khachhang4', 'password4', 'Phạm Thị D', '101 Đường D, Quận E, TP.HCM', '0912345678'),
-(5, 'khachhang5', 'password5', 'Hoàng Văn E', '102 Đường E, Quận F, Hà Nội', '0976543210'),
-(6, 'khachhang6', 'password6', 'Đinh Thị F', '103 Đường F, Quận G, Đà Nẵng', '0901122334'),
-(7, 'khachhang7', 'password7', 'Bùi Văn G', '104 Đường G, Quận H, Cần Thơ', '0922334455'),
-(8, 'khachhang8', 'password8', 'Đoàn Thị H', '105 Đường H, Quận I, Hà Nội', '0966778899'),
-(9, 'khachhang9', 'password9', 'Ngô Văn I', '106 Đường I, Quận J, TP.HCM', '0955566778'),
-(10, 'khachhang10', 'password10', 'Phan Thị J', '107 Đường J, Quận K, Hải Phòng', '0944455667');
+(5, 'khachhang5', 'password5', 'Hoàng Văn E', '102 Đường E, Quận F, Hà Nội', '0976543210');
 
 -- --------------------------------------------------------
 
@@ -219,6 +203,13 @@ CREATE TABLE `tbl_logo` (
   `id_logo` int(11) NOT NULL,
   `img_path` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_logo`
+--
+
+INSERT INTO `tbl_logo` (`id_logo`, `img_path`) VALUES
+(1, '/BTL_web/public/imgs/logo.png');
 
 -- --------------------------------------------------------
 
@@ -349,7 +340,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT cho bảng `tbl_banner`
 --
 ALTER TABLE `tbl_banner`
-  MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_chitiethoadon`
@@ -391,7 +382,7 @@ ALTER TABLE `tbl_khachhang`
 -- AUTO_INCREMENT cho bảng `tbl_logo`
 --
 ALTER TABLE `tbl_logo`
-  MODIFY `id_logo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_logo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_sanpham`
