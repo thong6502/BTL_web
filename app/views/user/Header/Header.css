@@ -9,12 +9,17 @@
     background: #fff;
 }
 a{
+    color: #333;
     text-decoration: none;
-    color: black;
+}
+a:hover{
+    text-decoration: none;
 }
 .header .logo {
     display: flex;
     font-size: 16px;
+    font-weight: bold;
+    color: #333;
 }
 
 .inner-menu {
@@ -64,10 +69,10 @@ a{
     font-weight: bold;
 }
 
-.inner-menu li a:hover {
-    background-color: #007bff;
-    color: white;
-}
+    /* .inner-menu li a:hover {
+        background-color: #007bff;
+        color: white;
+    } */
 
 /* Sub-menu xuất hiện khi hover vào menu "Sản phẩm" */
 .inner-menu li .dropdown-menu {
@@ -90,4 +95,11 @@ a{
 .inner-menu li .dropdown-menu li a:hover {
     background-color: #f8f9fa;
     color: #007bff;
+}
+
+
+@media screen and (max-width: 920px) {
+    .menu {
+        display: none;
+    }
 }

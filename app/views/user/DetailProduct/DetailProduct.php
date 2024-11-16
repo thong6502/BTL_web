@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
                     // Sau 5 giây (5000 milliseconds), ẩn thông báo
                     setTimeout(function() {
                         $('#success-alert').alert('close');
-                    }, 5000);
+                    }, 2000);
                 });
             </script>
 
