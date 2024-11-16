@@ -118,9 +118,9 @@
 
         <!-- Our Team Section -->
         <div class="section-title text-center">Đội ngũ của chúng tôi</div>
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-md-3 col-sm-6 team-member">
-                <img src="https://via.placeholder.com/80" alt="Team Member 1">
+                <img src="https://i.pinimg.com/236x/7b/71/6e/7b716e7f78cd875bcdbe45e9367a9d3d.jpg" alt="Team Member 1">
                 <div>
                     <h5>Trần Hoàng Sơn</h5>
                     <p>Giám đốc điều hành</p>
@@ -128,7 +128,7 @@
             </div>
 
             <div class="col-md-3 col-sm-6 team-member">
-                <img src="https://via.placeholder.com/80" alt="Team Member 2">
+                <img src="https://i.pinimg.com/474x/46/94/ea/4694ea014e81b0da8c9f0d083272d714.jpg" alt="Team Member 2">
                 <div>
                     <h5>Quỳnh Kendy</h5>
                     <p>Quản lý sản phẩm</p>
@@ -136,7 +136,7 @@
             </div>
 
             <div class="col-md-3 col-sm-6 team-member">
-                <img src="https://via.placeholder.com/80" alt="Team Member 3">
+                <img src="https://i.pinimg.com/236x/c9/01/95/c90195105f61f8c8134160621e359acf.jpg" alt="Team Member 3">
                 <div>
                     <h5>Lê Văn Thông</h5>
                     <p>Chuyên viên kỹ thuật</p>
@@ -144,7 +144,7 @@
             </div>
 
             <div class="col-md-3 col-sm-6 team-member">
-                <img src="https://via.placeholder.com/80" alt="Team Member 4">
+                <img src="https://i.pinimg.com/236x/44/66/e0/4466e0525c6588b27dabda3c21467fa8.jpg" alt="Team Member 4">
                 <div>
                     <h5>Ánh Tuyết</h5>
                     <p>Chuyên viên kỹ thuật</p>
