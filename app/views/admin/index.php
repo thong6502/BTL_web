@@ -4,6 +4,7 @@
         header("Location: /BTL_web/app/views/admin/Auths/Login.php");
         exit();
     }
+
 ?>
 
 
