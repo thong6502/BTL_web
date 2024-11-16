@@ -33,14 +33,28 @@ class data_sanpham
             return 0;
         }
     }
-
     // Các phương thức khác (sửa, thêm, xóa, tìm kiếm, v.v.)
-    public function sua_san_pham($id_sp, $id_hsx, $tensp, $giaban, $img_path,$mota ,$chitiet)
+        public function sua_san_pham($id_sp, $id_hsx, $tensp, $giaban, $img_path, $mota, $chitiet)
     {
         global $conn;
-        $sql = "UPDATE tbl_sanpham SET id_hsx = $id_hsx, tensp = '$tensp', giaban = $giaban, img_path = '$img_path',mota = $mota,chitiet = '$chitiet' WHERE id_sp = $id_sp";
-        $result = mysqli_query($conn, $sql);
-        return $result ? true : false;
+        $sql = "UPDATE tbl_sanpham SET id_hsx = ?, tensp = ?, giaban = ?, img_path = ?, mota = ?, chitiet = ? WHERE id_sp = ?";
+        
+        if ($stmt = $conn->prepare($sql)) { // Check if prepare is successfull or not.
+            $stmt->bind_param("isdsssi", $id_hsx, $tensp, $giaban, $img_path, $mota, $chitiet, $id_sp);
+            
+            if ($stmt->execute()) { // Check if execution is successfull or not.
+                $affected_rows = $stmt->affected_rows;
+                $stmt->close();
+                return $affected_rows; // better practice, send affected row number to controller to handle user notification or further logic. 
+            } else {
+                error_log("Error updating record: " . $stmt->error); // LOG the error 
+                $stmt->close();
+                return false;
+            }
+        } else {
+            error_log("Error preparing statement: " . $conn->error); // LOG the error 
+            return false;
+        }
     }
 
     public function them_san_pham($id_hsx, $tensp, $giaban, $img_path, $mota ,$chitiet)

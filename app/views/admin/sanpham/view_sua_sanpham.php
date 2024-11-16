@@ -19,7 +19,7 @@
     <table>
       <tr>
         <td>Tên sản phẩm</td>
-        <td><input required type="text" name="tensp" value="<?php echo $row['tensp']?>"></td>
+        <td><input required type="text" name="tensanpham" value="<?php echo $row['tensp']?>"></td>
       </tr>
       <tr>
         <td>Hãng sản xuất</td>
@@ -41,7 +41,7 @@
       <tr class="image-upload-row">
         <td>
           <label class="image-upload-label" for="img">Chọn ảnh</label>
-          <input required type="file" name="image" id="img" accept="image/*">
+          <input type="file" name="image" id="img" accept="image/*">
         </td>
         <td >
           <div class="image-preview-cell"><img id="previewImage" src="<?php echo $row['img_path'] ?>" width="200"></div>

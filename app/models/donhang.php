@@ -6,9 +6,7 @@
       global $conn;
       $sql = "SELECT hd.id_hd, kh.hoten, hd.ngay_ban, hd.tongtien
               FROM tbl_khachhang kh
-              JOIN tbl_hoadon hd ON kh.id_kh = hd.id_kh
-              JOIN tbl_chitiethoadon cthd ON hd.id_hd = cthd.id_hd
-              JOIN tbl_sanpham sp ON cthd.id_sp = sp.id_sp";
+              JOIN tbl_hoadon hd ON kh.id_kh = hd.id_kh";
       $result = mysqli_query($conn, $sql);
       return $result;
     }

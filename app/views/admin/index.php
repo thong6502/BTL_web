@@ -1,4 +1,13 @@
 <?php
+    session_start();
+    if (!$_SESSION['check_login_admin']) {
+        header("Location: /BTL_web/app/views/admin/Auths/Login.php");
+        exit();
+    }
+?>
+
+
+<?php
     include_once($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/app/controllers/Admin/logoController/hienthi_logo_controller.php');
     $row_logo = mysqli_fetch_assoc($result);
 ?>
@@ -62,6 +71,11 @@
                     <li><a href="?page=qlchuchay">Quản lý chữ chạy</a></li>
                     <li><a href="?page=qllogo">Quản lý logo</a></li>
                 </ul>
+            </li>
+            <li>
+                <a href="/BTL_web/app/views/admin/Auths/logout.php">
+                    <i class="fa-solid fa-circle-left"></i> <span>Đăng xuất</span>
+                </a>
             </li>
         </ul>
         <div class="div_img">
