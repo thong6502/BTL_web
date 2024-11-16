@@ -46,11 +46,7 @@ color: #007bff;
 text-decoration: none;
 }
 .container .multi-line-text {
-display: -webkit-box;
--webkit-box-orient: vertical;
--webkit-line-clamp: 2;
 width: 350px;
-overflow: hidden;
 }
 .container button {
 color: #fff;

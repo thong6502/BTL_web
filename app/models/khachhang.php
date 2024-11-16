@@ -1,6 +1,5 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");
-  include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/app/global.php");  
 
   class data_khachhang
   {

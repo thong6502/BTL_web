@@ -1,25 +1,24 @@
 <?php
-// include("../../../config/dbconnect.php");
-include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");//dẫn tuyệt đối
-  // include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/app/global.php"); 
+include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");
 class data_admin
 {
-  function admin_login($user, $pass)
+  function login($user, $password)
   {
     global $conn;
-    $sql = "SELECT * FROM admin WHERE user = $user AND pass = $pass";
+    $sql = "SELECT * FROM tbl_admin WHERE user = '$user' AND password = '$password'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
+      session_start();
+      $_SESSION['check_login_admin'] = true;
       return true;
     } else {
       return false;
     }
   }
-  function hien_thi_admin() {
+  function register($user, $password) {
     global $conn;
-    $sql = "SELECT * FROM admin";
-    $result = mysqli_query($conn, $sql);
+    $sql = "INSERT INTO tbl_admin(user, password) VALUES('$user', '$password')";
     $result = mysqli_query($conn, $sql);
     return $result;
-}
+  }
 }
