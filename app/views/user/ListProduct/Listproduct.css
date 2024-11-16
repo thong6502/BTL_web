@@ -30,6 +30,8 @@
 .product__image {
     
     width: 100%; 
+    /* width: 136px; */
+    aspect-ratio: 3/4!important; 
     border-radius: 15px 15px 0 0; 
     object-fit: contain; 
 }

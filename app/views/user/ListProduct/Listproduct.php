@@ -1,11 +1,16 @@
+
 <main role="main" class="container">
     <div class="listproduct mt-5">
         <?php
-        include('./../../models/sanpham.php');
+        include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/config/dbconnect.php");
+        include($_SERVER['DOCUMENT_ROOT'] . "/BTL_web/app/models/sanpham.php");
         $get_data = new data_sanpham();
+    
+        // Lấy nhà sản xuất từ tham số URL nếu có
+        $hangsx = isset($_GET['hangsx']) ? $_GET['hangsx'] : ''; // Tham số hangsx từ URL
 
         // Số sản phẩm trên mỗi trang
-        $products_per_page = 8;
+        $products_per_page = 12;
 
         // Lấy trang hiện tại từ URL, nếu không có thì mặc định là trang 1
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -13,14 +18,14 @@
         // Tính toán offset
         $offset = ($page - 1) * $products_per_page;
 
-        // Lấy danh sách sản phẩm theo trang
-        $select = $get_data->hien_thi_sanpham($products_per_page, $offset);
+        // Lấy danh sách sản phẩm theo nhà sản xuất và phân trang
+        $select = $get_data->hien_thi_sanpham_theo_hang($hangsx, $products_per_page, $offset);
 
-        // Lấy tổng số sản phẩm để tính số trang
-        $total_products = $get_data->get_total_sanpham();
+        // Lấy tổng số sản phẩm của nhà sản xuất để tính tổng số trang
+        $total_products = $get_data->get_total_sanpham_theo_hang($hangsx);
         $total_pages = ceil($total_products / $products_per_page);
         ?>
-        
+
         <!-- Hiển thị thông báo thành công nếu có -->
         <?php if (isset($_SESSION['success_message'])) { ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,7 +34,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?php unset($_SESSION['success_message']); // Xóa thông báo sau khi hiển thị ?>
+            <?php unset($_SESSION['success_message']); // Xóa thông báo sau khi hiển thị 
+            ?>
         <?php } ?>
 
         <div class="row justify-content-start">
@@ -52,7 +58,7 @@
                             <!-- Nút "Thêm vào giỏ hàng" -->
                             <form method="POST" action="/BTL_web/app/views/user/Cart/add_to_cart.php" class="text-center mt-2">
                                 <input type="hidden" name="id_sp" value="<?php echo htmlspecialchars($pr['id_sp']); ?>">
-                                <button type="submit" class="btn btn-primary btn-sm">🛒 Thêm vào giỏ hàng</button>
+                                <button type="submit" class="btn btn-dark btn-sm">🛒 Thêm vào giỏ hàng</button>
                             </form>
                         </div>
                     </div>
@@ -67,19 +73,19 @@
             <ul class="pagination justify-content-center">
                 <!-- Trang trước -->
                 <?php if ($page > 1) { ?>
-                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page - 1; ?>">Trước</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page - 1; ?>&hangsx=<?php echo urlencode($hangsx); ?>">Trước</a></li>
                 <?php } ?>
 
                 <!-- Các số trang -->
                 <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
                     <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        <a class="page-link" href="?page=<?php echo $i; ?>&hangsx=<?php echo urlencode($hangsx); ?>"><?php echo $i; ?></a>
                     </li>
                 <?php } ?>
 
                 <!-- Trang sau -->
                 <?php if ($page < $total_pages) { ?>
-                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page + 1; ?>">Sau</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page + 1; ?>&hangsx=<?php echo urlencode($hangsx); ?>">Sau</a></li>
                 <?php } ?>
             </ul>
         </nav>

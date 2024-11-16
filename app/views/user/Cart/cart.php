@@ -17,15 +17,20 @@ $total_price = 0;
     <title>Giỏ hàng</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="cart.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../Footer/Footer.css">
+    <link rel="stylesheet" href="../Header/Header.css">
 </head>
 
 <body>
-    <main role="main" class="container">
+    <?php
+    include("../Header/Header.php")
+    ?>
+    <main role="main" class="container mb-5">
         <h2 class="mt-5">🛒 Giỏ hàng của bạn</h2>
         <a href="/BTL_web/app/views/user/user.php" class="btn btn-secondary mt-3">🔙 Quay về</a>
         <?php if (!empty($cart_items)) { ?>
-            <table class="table mt-4">
+            <table class="table mt-4 ">
                 <thead>
                     <tr>
                         <th>Sản phẩm</th>
@@ -74,8 +79,11 @@ $total_price = 0;
         <?php } else { ?>
             <p>Giỏ hàng của bạn đang trống.</p>
         <?php } ?>
-    </main>
 
+    </main>
+    <?php
+    include("../Footer/Footer.php")
+    ?>
 </body>
 
 </html>

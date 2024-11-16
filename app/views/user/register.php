@@ -10,16 +10,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
 
     // Kiểm tra xem tên đăng nhập đã tồn tại hay chưa
-    $sql_check = "SELECT * FROM tbl_khachhang WHERE user = '$username'";
-    $result_check = mysqli_query($conn, $sql_check);
+    $sql_check = "SELECT * FROM tbl_khachhang WHERE user = ?";
+    $stmt_check = mysqli_prepare($conn, $sql_check);
+    mysqli_stmt_bind_param($stmt_check, "s", $username);
+    mysqli_stmt_execute($stmt_check);
+    $result_check = mysqli_stmt_get_result($stmt_check);
     
     if (mysqli_num_rows($result_check) > 0) {
         $error_message = "Tên đăng nhập đã tồn tại.";
     } else {
+        // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         // Nếu tên đăng nhập chưa tồn tại, thực hiện đăng ký
         $sql_insert = "INSERT INTO tbl_khachhang (user, password, hoten, diachi, sdt) 
-                        VALUES ('$username', '$password', '$fullname', '$address', '$phone')";
-        if (mysqli_query($conn, $sql_insert)) {
+                        VALUES (?, ?, ?, ?, ?)";
+        $stmt_insert = mysqli_prepare($conn, $sql_insert);
+        mysqli_stmt_bind_param($stmt_insert, "sssss", $username, $hashed_password, $fullname, $address, $phone);
+        
+        if (mysqli_stmt_execute($stmt_insert)) {
             $success_message = "Đăng ký thành công. Bạn có thể đăng nhập ngay bây giờ.";
         } else {
             $error_message = "Có lỗi xảy ra khi đăng ký: " . mysqli_error($conn);
