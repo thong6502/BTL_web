@@ -35,48 +35,39 @@ class data_sanpham
     }
 
     // Các phương thức khác (sửa, thêm, xóa, tìm kiếm, v.v.)
-    public function sua_san_pham($id_sp, $id_hsx, $id_dm, $tensanpham, $giaban, $img_path, $chitiet)
+    public function sua_san_pham($id_sp, $id_hsx, $tensp, $giaban, $img_path,$mota ,$chitiet)
     {
         global $conn;
-        $sql = "UPDATE tbl_sanpham SET id_hsx = $id_hsx, tensanpham = '$tensanpham', giaban = $giaban, img_path = '$img_path', chitiet = '$chitiet' WHERE id_sp = $id_sp";
+        $sql = "UPDATE tbl_sanpham SET id_hsx = $id_hsx, tensp = '$tensp', giaban = $giaban, img_path = '$img_path',mota = $mota,chitiet = '$chitiet' WHERE id_sp = $id_sp";
         $result = mysqli_query($conn, $sql);
         return $result ? true : false;
     }
 
-    public function them_san_pham($id_hsx, $id_dm, $tensanpham, $giaban, $img_path, $chitiet)
+    public function them_san_pham($id_hsx, $tensp, $giaban, $img_path, $mota ,$chitiet)
     {
         global $conn;
-        $sql = "INSERT INTO tbl_sanpham (id_hsx, id_dm, tensanpham, giaban, img_path, chitiet) VALUES ($id_hsx, $id_dm, '$tensanpham', $giaban, '$img_path', '$chitiet')";
+        $sql = "INSERT INTO tbl_sanpham (id_hsx, tensp, giaban, img_path, mota ,chitiet) VALUES ($id_hsx, '$tensp', $giaban, '$img_path', '$mota' ,'$chitiet')";
         $result = mysqli_query($conn, $sql);
-        return $result ? true : false;
+        return $result;
     }
 
     public function xoa_san_pham($id_sp){
       global $conn;
-      $sql = "UPDATE tbl_sanpham SET is_xoa = 0 WHERE id_sp = $id_sp";
+      $sql = "DELETE FROM tbl_sanpham WHERE id_sp = $id_sp";
       $result = mysqli_query($conn, $sql);
-      if($result){
-        return true;
-      }else{
-        return false;
-      }
-    }
-
-    public function khoi_phuc_san_pham($id_sp){
-      global $conn;
-      $sql = "UPDATE tbl_sanpham SET is_xoa = 1 WHERE id_sp = $id_sp";
-      $result = mysqli_query($conn, $sql);
-      if($result){
-        return true;
-      }else{
-        return false;
-      }
     }
 
     public function search_sanpham($id_hsx, $tensp)
     {
         global $conn;
         $sql = "SELECT * FROM tbl_sanpham WHERE id_hsx LIKE '%$id_hsx%' AND tensp LIKE '%$tensp%'";
+        $result = mysqli_query($conn, $sql);
+        return $result;
+    }
+    public function search_sanpham_by_id($id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM tbl_sanpham WHERE id_sp = $id";
         $result = mysqli_query($conn, $sql);
         return $result;
     }

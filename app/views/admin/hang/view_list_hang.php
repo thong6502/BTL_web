@@ -19,13 +19,13 @@
             echo "<tr>";
             echo "  <td>{$row['id_hsx']}</td>";
             echo "  <td>{$row['tenhsx']}</td>";
-            echo "  <td><a href='#'><button>Sửa</button></a></td>";
-            echo "  <td><a href='#'><button>Xóa</button></a></td>";
+            echo "  <td><a href='./?id_hsx={$row['id_hsx']}&page=sua_hang'><button type='button'>Sửa</button></a></td>";
+            echo "  <td><a href='/BTL_web/app/controllers/Admin/hangsanxuatController/xoa_hangsanxuat_controller.php?id_hsx={$row['id_hsx']}'><button>Xóa</button></a></td>";
             echo "</tr>";
           }
         ?>
       </tbody>
     </table>
   </div>
-  <a href="#"><button>Thêm</button></button></a>
+  <a href="./?page=them_hang"><button>Thêm</button></button></a>
 </div>

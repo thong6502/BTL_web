@@ -1,7 +1,6 @@
 <?php
-include("../../../config/dbconnect.php");
-include("../../global.php");
-
+include_once($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/config/dbconnect.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/BTL_web/app/global.php');
 
 
 class data_gio_hang
@@ -37,4 +36,5 @@ class data_gio_hang
     $sql = "DELETE FROM tbl_chitiethoadon WHERE id_hd = $id_hd AND id_sp = $id_sp";
     mysqli_query($conn, $sql);
   }
+  
 }
